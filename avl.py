@@ -5,8 +5,6 @@ Supports operations:
 
 add(value) - adds a node into the AVL tree; must then balance
 
-remove(value) - removes a node from the AVL tree; must then rebalance
-
 search(value) - looks for a node in the value.
 """
 
@@ -139,6 +137,17 @@ class Avl():
         for c in [node.left, node.right]:
             self.traverse(c, indent + "    ")
 
+    def search(self, val):
+        def r(n):
+            if not n: return False 
+            if n.value > val:
+                return r(n.left)
+            elif n.value < val:
+                return r(n.right)
+            else:
+                return True
+        return r(self.root)
+
 if __name__ == "__main__":
     avl = Avl()
     avl.addNode(3)
@@ -149,5 +158,8 @@ if __name__ == "__main__":
     avl.addNode(8)
     print("Answer")
     avl.traverse(avl.root)
+    print(avl.search(5))
+    print(avl.search(3))
+    print(avl.search(9))
 
 
